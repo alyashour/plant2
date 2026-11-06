@@ -1,2 +1,9 @@
+.venv
 *__pycache__*
 *.ckpt
+
+viz_outputs/
+results.json
+
+weap/mem_outputs.txt
+weap/export.sh

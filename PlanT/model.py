@@ -4,7 +4,7 @@ import torch
 import torch.nn as nn
 
 from transformers import (
-    AutoConfig,
+    BertConfig,
     AutoModel,
 )
 
@@ -34,7 +34,7 @@ class HFLM(nn.Module):
         self.vocab_size[0] = int((1 + self.config_all.model.training.get("range_factor_front", 1))/2*self.vocab_size[0])
 
         # model
-        config = AutoConfig.from_pretrained(
+        config = BertConfig.from_pretrained(
             self.config_net.hf_checkpoint
         )  # load config from hugging face model
         self.n_embd = config.hidden_size

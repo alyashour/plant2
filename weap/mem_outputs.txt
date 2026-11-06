@@ -1,0 +1,31 @@
+$ unset CUDA_VISIBLE_DEVICES
+
+$ python measure_plant_vram.py --load gpu
+
+GPU: NVIDIA GeForce RTX 5060
+Before load: 4.403 GiB free of 7.519 GiB
+Model parameters: 0.139 GiB
+{
+"status": "ok",
+"load_mode": "gpu",
+"allocated_after_load_GiB": 0.1394505500793457,
+"peak_allocated_during_load_GiB": 0.5570135116577148,
+"reserved_after_load_GiB": 0.58203125,
+"peak_reserved_during_load_GiB": 0.58203125
+}
+Measures loading only. CUDA context, CARLA, visualization, and inference need additional memory.
+
+$ python measure_plant_vram.py --load cpu
+
+GPU: NVIDIA GeForce RTX 5060
+Before load: 4.416 GiB free of 7.519 GiB
+Model parameters: 0.139 GiB
+{
+"status": "ok",
+"load_mode": "cpu",
+"allocated_after_load_GiB": 0.1385960578918457,
+"peak_allocated_during_load_GiB": 0.1385965347290039,
+"reserved_after_load_GiB": 0.15625,
+"peak_reserved_during_load_GiB": 0.15625
+}
+Measures loading only. CUDA context, CARLA, visualization, and inference need additional memory.

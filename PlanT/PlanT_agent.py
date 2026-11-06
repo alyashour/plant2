@@ -45,6 +45,8 @@ class PlanTAgent(DataAgent):
         
         self.use_rgb = True # eval_config["viz_img"]
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
+        self.device = 'cpu' # aly: added this so I can run it on my chud pc
+
 
         self.route_index = route_index
         print("Route index:", self.route_index)
@@ -65,7 +67,14 @@ class PlanTAgent(DataAgent):
         print(f'Loading model from {LOAD_CKPT_PATH}')
 
         if Path(LOAD_CKPT_PATH).suffix == '.ckpt':
-            self.net = LitHFLM.load_from_checkpoint(LOAD_CKPT_PATH, map_location=self.device)
+            self.net = LitHFLM.load_from_checkpoint(
+                    LOAD_CKPT_PATH, 
+                    map_location=self.device,
+                    weights_only=False
+            ).to(self.device)
+            self.net.eval()
+            torch.cuda.empty_cache()
+
         else:
             raise Exception(f'Unknown model type: {Path(LOAD_CKPT_PATH).suffix}')
         self.net.eval()
